@@ -1,9 +1,11 @@
-import java.util.ArrayList;
+package workspace;
 
-public class MeetingRoom {
+public class MeetingRoom implements  Workspace {
+
+
     private String size;
     private int capacity;
-    private boolean isBooked = false;
+
 
     public MeetingRoom(String size) {
         this.size = size;
@@ -15,6 +17,10 @@ public class MeetingRoom {
         } else if (size.equalsIgnoreCase("Small")) {
             capacity = 3;
         }
+    }
+    @Override
+    public int getCapacity() {
+        return capacity;
     }
 
 }

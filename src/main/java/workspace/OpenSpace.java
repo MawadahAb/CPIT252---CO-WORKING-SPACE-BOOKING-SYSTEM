@@ -1,4 +1,6 @@
-public class OpenSpace {
+package workspace;
+
+public class OpenSpace implements Workspace {
     private final int totalSeats;
     private int availableSeats;
 
@@ -23,5 +25,10 @@ public class OpenSpace {
 
     public int getAvailableSeats() {
         return availableSeats;
+    }
+
+    @Override
+    public int getCapacity() {
+        return totalSeats;
     }
 }
