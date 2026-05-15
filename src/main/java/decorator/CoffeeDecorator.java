@@ -1,5 +1,4 @@
 
-
 public class CoffeeDecorator extends WorkspaceDecorator {
 
     public CoffeeDecorator(Workspace workspace) {
