@@ -1,3 +1,11 @@
+package factory;
+
+import workspace.Workspace;
+import workspace.MeetingRoom;
+import workspace.PrivateOffice;
+import workspace.OpenSpace;
+public class workSpaceFactory {
+
 public static Workspace createWorkspace(String type) {
 
     if (type.equalsIgnoreCase("LargeMeetingRoom")) {
@@ -13,8 +21,9 @@ public static Workspace createWorkspace(String type) {
         return new PrivateOffice();
     }
     else if (type.equalsIgnoreCase("OpenSpace")) {
-        return new OpenSpace(); 
+        return new OpenSpace(20);
     }
 
     throw new IllegalArgumentException("Invalid workspace type");
+    }
 }

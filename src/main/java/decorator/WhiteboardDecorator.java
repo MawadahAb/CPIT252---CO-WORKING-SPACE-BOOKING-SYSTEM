@@ -1,4 +1,7 @@
 
+package decorator;
+
+import workspace.Workspace;
 
 public class WhiteboardDecorator extends WorkspaceDecorator {
 

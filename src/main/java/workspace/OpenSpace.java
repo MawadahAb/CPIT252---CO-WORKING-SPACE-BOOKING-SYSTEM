@@ -3,10 +3,12 @@ package workspace;
 public class OpenSpace implements Workspace {
     private final int totalSeats;
     private int availableSeats;
+    private double costPerHour;
 
     public OpenSpace(int totalSeats) {
         this.totalSeats = totalSeats;
         this.availableSeats = totalSeats;
+        this.costPerHour = 30;
     }
 
     public boolean bookSeat() {
@@ -30,5 +32,15 @@ public class OpenSpace implements Workspace {
     @Override
     public int getCapacity() {
         return totalSeats;
+    }
+
+    @Override
+    public double getCost() {
+        return costPerHour;
+    }
+
+    @Override
+    public String getDescription() {
+        return "Open Space Seat";
     }
 }

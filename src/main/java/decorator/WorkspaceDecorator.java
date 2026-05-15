@@ -1,4 +1,7 @@
 
+package decorator;
+
+import workspace.Workspace;
 
 public abstract class WorkspaceDecorator implements Workspace {
 

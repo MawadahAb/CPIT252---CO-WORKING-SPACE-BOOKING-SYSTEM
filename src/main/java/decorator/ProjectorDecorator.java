@@ -1,3 +1,6 @@
+package decorator;
+
+import workspace.Workspace;
 
 public class ProjectorDecorator extends WorkspaceDecorator {
 
