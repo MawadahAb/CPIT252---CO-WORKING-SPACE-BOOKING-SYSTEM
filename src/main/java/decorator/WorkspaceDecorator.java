@@ -1,5 +1,4 @@
 
-import workspace.core.Workspace;
 
 public abstract class WorkspaceDecorator implements Workspace {
 
