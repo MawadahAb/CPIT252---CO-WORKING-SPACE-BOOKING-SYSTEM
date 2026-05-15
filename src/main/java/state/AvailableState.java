@@ -3,7 +3,7 @@ package state;
 import paymentStrategy.PaymentContext;
 import workspace.Workspace;
 
-public class Available implements BookingState {
+public class AvailableState implements BookingState {
 
     @Override
     public void book(BookingContext context) {
@@ -11,7 +11,7 @@ public class Available implements BookingState {
 
         if (reserved) {
             System.out.println("Workspace has been reserved.");
-            context.changeState(new Reserved());
+            context.changeState(new ReservedState());
         } else {
             System.out.println("Workspace is not available.");
         }

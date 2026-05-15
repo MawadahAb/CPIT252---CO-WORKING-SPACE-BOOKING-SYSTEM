@@ -4,7 +4,7 @@ import paymentStrategy.PaymentContext;
 import paymentStrategy.PaymentReceipt;
 import workspace.Workspace;
 
-public class CheckedIn implements BookingState {
+public class CheckedInState implements BookingState {
 
     @Override
     public void book(BookingContext context) {
@@ -43,7 +43,7 @@ public class CheckedIn implements BookingState {
         context.getInventory().release(context.getWorkspace());
 
         System.out.println("Customer checked out. Workspace is available again.");
-        context.changeState(new CheckedOut());
+        context.changeState(new CheckedOutState());
     }
 
     @Override

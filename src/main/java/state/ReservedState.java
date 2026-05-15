@@ -3,7 +3,7 @@ package state;
 import paymentStrategy.PaymentContext;
 import workspace.Workspace;
 
-public class Reserved implements BookingState {
+public class ReservedState implements BookingState {
 
     @Override
     public void book(BookingContext context) {
@@ -19,7 +19,7 @@ public class Reserved implements BookingState {
     @Override
     public void checkIn(BookingContext context) {
         System.out.println("Customer checked in.");
-        context.changeState(new CheckedIn());
+        context.changeState(new CheckedInState());
     }
 
     @Override
@@ -31,6 +31,6 @@ public class Reserved implements BookingState {
     public void cancel(BookingContext context) {
         context.getInventory().release(context.getWorkspace());
         System.out.println("Booking cancelled. Workspace is available again.");
-        context.changeState(new Cancelled());
+        context.changeState(new CancelledState());
     }
 }

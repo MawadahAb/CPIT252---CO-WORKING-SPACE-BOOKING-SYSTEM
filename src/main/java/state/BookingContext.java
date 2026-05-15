@@ -24,7 +24,7 @@ public class BookingContext {
         this.inventory = inventory;
         this.bookingDurationHours = bookingDurationHours;
 
-        this.state = new Available();
+        this.state = new AvailableState();
         this.extraFee = 0;
     }
 

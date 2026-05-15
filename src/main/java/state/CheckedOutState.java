@@ -3,7 +3,7 @@ package state;
 import paymentStrategy.PaymentContext;
 import workspace.Workspace;
 
-public class CheckedOut implements BookingState {
+public class CheckedOutState implements BookingState {
 
     @Override
     public void book(BookingContext context) {
