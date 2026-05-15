@@ -16,6 +16,11 @@ public class PrivateOffice implements  Workspace {
     }
 
     @Override
+    public double getAddOnsCost() {
+        return 0;
+    }
+
+    @Override
     public String getDescription() {
         return "Private Office";
     }

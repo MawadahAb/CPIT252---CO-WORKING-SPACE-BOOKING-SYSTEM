@@ -5,24 +5,29 @@ import workspace.Workspace;
 
 public abstract class WorkspaceDecorator implements Workspace {
 
-    protected Workspace workspace;
+    protected Workspace decoratedWorkspace;
 
-    public WorkspaceDecorator(Workspace workspace) {
-        this.workspace = workspace;
+    public WorkspaceDecorator(Workspace decoratedWorkspace) {
+        this.decoratedWorkspace = decoratedWorkspace;
     }
 
     @Override
     public int getCapacity() {
-        return workspace.getCapacity();
+        return decoratedWorkspace.getCapacity();
     }
 
     @Override
     public double getCost() {
-        return workspace.getCost();
+        return decoratedWorkspace.getCost();
+    }
+
+    @Override
+    public double getAddOnsCost() {
+        return decoratedWorkspace.getAddOnsCost();
     }
 
     @Override
     public String getDescription() {
-        return workspace.getDescription();
+        return decoratedWorkspace.getDescription();
     }
 }

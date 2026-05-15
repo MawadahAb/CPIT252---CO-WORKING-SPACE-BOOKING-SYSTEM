@@ -4,17 +4,18 @@ import workspace.Workspace;
 
 public class PrinterDecorator extends WorkspaceDecorator {
 
-    public PrinterDecorator(Workspace workspace) {
-        super(workspace);
+    public PrinterDecorator(Workspace decoratedWorkspace) {
+        super(decoratedWorkspace);
     }
 
     @Override
-    public double getCost() {
-        return workspace.getCost() + 15;
+    public double getAddOnsCost() {
+        return decoratedWorkspace.getAddOnsCost() + 15;
     }
+
 
     @Override
     public String getDescription() {
-        return workspace.getDescription() + " + Printer";
+        return decoratedWorkspace.getDescription() + " + Printer";
     }
 }

@@ -40,6 +40,11 @@ public class OpenSpace implements Workspace {
     }
 
     @Override
+    public double getAddOnsCost() {
+        return 0;
+    }
+
+    @Override
     public String getDescription() {
         return "Open Space Seat";
     }

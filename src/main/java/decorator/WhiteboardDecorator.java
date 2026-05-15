@@ -5,17 +5,17 @@ import workspace.Workspace;
 
 public class WhiteboardDecorator extends WorkspaceDecorator {
 
-    public WhiteboardDecorator(Workspace workspace) {
-        super(workspace);
+    public WhiteboardDecorator(Workspace decoratedWorkspace) {
+        super(decoratedWorkspace);
     }
 
     @Override
-    public double getCost() {
-        return workspace.getCost() + 5;
+    public double getAddOnsCost() {
+        return decoratedWorkspace.getAddOnsCost() + 5;
     }
 
     @Override
     public String getDescription() {
-        return workspace.getDescription() + " + Whiteboard";
+        return decoratedWorkspace.getDescription() + " + Whiteboard";
     }
 }

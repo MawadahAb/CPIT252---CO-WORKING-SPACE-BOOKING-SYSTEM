@@ -1,3 +1,5 @@
+package customer;
+
 public class Customer {
 
     private String fullName;
@@ -22,10 +24,6 @@ public class Customer {
 
     public String getEmail() {
         return email;
-    }
-
-    public int getNumberOfPeople() {
-        return numberOfPeople;
     }
 
     public String getContactInfo() {

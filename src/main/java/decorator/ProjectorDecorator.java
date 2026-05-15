@@ -4,17 +4,17 @@ import workspace.Workspace;
 
 public class ProjectorDecorator extends WorkspaceDecorator {
 
-    public ProjectorDecorator(Workspace workspace) {
-        super(workspace);
+    public ProjectorDecorator(Workspace decoratedWorkspace) {
+        super(decoratedWorkspace);
     }
 
     @Override
     public double getCost() {
-        return workspace.getCost() + 20;
+        return decoratedWorkspace.getCost() + 20;
     }
 
     @Override
     public String getDescription() {
-        return workspace.getDescription() + " + Projector";
+        return decoratedWorkspace.getDescription() + " + Projector";
     }
 }
