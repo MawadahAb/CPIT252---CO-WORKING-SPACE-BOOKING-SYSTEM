@@ -9,8 +9,8 @@ public class ProjectorDecorator extends WorkspaceDecorator {
     }
 
     @Override
-    public double getCost() {
-        return decoratedWorkspace.getCost() + 20;
+    public double getAddOnsCost() {
+        return decoratedWorkspace.getAddOnsCost() + 15;
     }
 
     @Override

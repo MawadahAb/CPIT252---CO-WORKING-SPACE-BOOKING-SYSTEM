@@ -1,3 +1,5 @@
+package workspace;
+
 public class WorkspaceInventory {
 
     private int smallMeetingRooms = 3;
