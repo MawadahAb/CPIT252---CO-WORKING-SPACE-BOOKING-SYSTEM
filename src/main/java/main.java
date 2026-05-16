@@ -24,9 +24,11 @@ import java.util.Scanner;
 public class main {
 
     static Scanner input = new Scanner(System.in);
-
+    
+    // Shared inventory object to manage workspace availability
     static WorkspaceInventory inventory = new WorkspaceInventory();
 
+    // Store all bookings in the system
     static ArrayList<BookingContext> bookings = new ArrayList<>();
 
     public static void main(String[] args) {
@@ -37,7 +39,7 @@ public class main {
 
         while (true) {
 
-            System.out.println("\nAre you:");
+            System.out.println("\nSelect Your role:");
             System.out.println("1. User");
             System.out.println("2. Manager");
             System.out.println("3. Exit");
@@ -45,16 +47,16 @@ public class main {
             System.out.print("Enter your choice: ");
 
             int choice = input.nextInt();
-            input.nextLine();
-
+            input.nextLine();  
+        // User workflow
             if (choice == 1) {
 
                 userMenu();
-
+        // Manager workflow
             } else if (choice == 2) {
 
                 managerMenu();
-
+          // Exit system
             } else if (choice == 3) {
 
                 System.out.println("Thank you for using the system.");
@@ -66,11 +68,11 @@ public class main {
             }
         }
     }
-
+    // Handle user booking workflow
     public static void userMenu() {
 
         System.out.println("\n--- USER MENU ---");
-
+    // Collect customer information
         System.out.print("Enter your full name: ");
         String name = input.nextLine();
 
@@ -82,15 +84,15 @@ public class main {
         input.nextLine();
 
         Customer customer = new Customer(name, phone);
-
+        // Let user select workspace
         Workspace workspace = chooseWorkspace();
-
+        // Check invalid workspace
         if (workspace == null) {
 
             System.out.println("Invalid workspace.");
             return;
         }
-
+        // Create booking context
         BookingContext booking = new BookingContext(customer, workspace, inventory, hours);
 
         System.out.println("\n--- WORKSPACE DETAILS ---");
@@ -126,7 +128,7 @@ public class main {
             System.out.println("Booking cancelled.");
         }
     }
-
+    // Allow user to choose workspace type
     public static Workspace chooseWorkspace() {
 
         System.out.println("\nChoose Workspace Type:");
@@ -141,7 +143,7 @@ public class main {
 
         int workspaceChoice = input.nextInt();
         input.nextLine();
-
+     // Factory Pattern used to create workspace objects
         if (workspaceChoice == 1) {
 
             return workSpaceFactory.createWorkspace("PrivateOffice");
@@ -167,7 +169,8 @@ public class main {
             return null;
         }
     }
-
+    
+    // Handle booking state workflow
     public static void bookingProcessMenu(BookingContext booking) {
 
         boolean running = true;
@@ -193,20 +196,20 @@ public class main {
 
                 int choice = input.nextInt();
                 input.nextLine();
-
+              // Add services using Decorator Pattern
                 if (choice == 1) {
 
                     addServices(booking);
-
+             // Move booking to CheckedInState
                 } else if (choice == 2) {
 
                     booking.checkIn();
-
+                // Cancel reservation
                 } else if (choice == 3) {
 
                     booking.cancel();
                     running = false;
-
+                // Exit menu
                 } else if (choice == 4) {
 
                     running = false;
@@ -215,7 +218,7 @@ public class main {
 
                     System.out.println("Invalid choice.");
                 }
-
+            // Checked-in state actions
             } else if (booking.getState() instanceof CheckedInState) {
 
                 System.out.println("\n1. Add extra services");
@@ -254,11 +257,11 @@ public class main {
             }
         }
     }
-
+// Add extra services to the booking
     public static void addServices(BookingContext booking) {
 
         boolean adding = true;
-
+    // Keep displaying services menu until user chose Done
         while (adding) {
 
             System.out.println("\nChoose Extra Service:");
@@ -273,7 +276,7 @@ public class main {
 
             int serviceChoice = input.nextInt();
             input.nextLine();
-
+        // Current workspace before adding services
             Workspace currentWorkspace = booking.getWorkspace();
 
             if (serviceChoice == 1) {
@@ -302,7 +305,7 @@ public class main {
             }
         }
     }
-
+// Choose payment method using Strategy Pattern
     public static PaymentContext choosePaymentMethod() {
 
         System.out.println("\nChoose Payment Method:");
@@ -314,7 +317,7 @@ public class main {
 
         int paymentChoice = input.nextInt();
         input.nextLine();
-
+    // Create CreditCard payment strategy
         if (paymentChoice == 1) {
 
             System.out.print("Card holder name: ");
@@ -330,7 +333,7 @@ public class main {
             String expirationDate = input.nextLine();
 
             return new PaymentContext(new CreditCard(cardHolderName, cardNumber, cvv, expirationDate));
-
+    // Create PayPal payment strategy
         } else {
 
             System.out.print("PayPal email: ");
@@ -342,7 +345,7 @@ public class main {
             return new PaymentContext(new PayPal(paypalEmail, paypalPassword));
         }
     }
-
+// Handle manager operations
     public static void managerMenu() {
 
         boolean managerRunning = true;
@@ -378,7 +381,7 @@ public class main {
             }
         }
     }
-
+// Display all available workspaces
     public static void printAvailableRooms() {
 
         System.out.println("\n--- AVAILABLE ROOMS ---");
@@ -389,18 +392,18 @@ public class main {
         printAvailability("LargeMeetingRoom");
         printAvailability("OpenSpace");
     }
-
+// Calculate and display available rooms count
     public static void printAvailability(String type) {
-
+// Create workspace object using Factory Pattern
         Workspace workspace = workSpaceFactory.createWorkspace(type);
 
         int count = 0;
-
+    // Count available workspaces
         while (inventory.reserve(workspace)) {
 
             count++;
         }
-
+    // Restore inventory count after checking
         for (int i = 0; i < count; i++) {
 
             inventory.release(workspace);
@@ -408,13 +411,13 @@ public class main {
 
         System.out.println(workspace.getDescription() + ": " + count + " available");
     }
-
+// Display all active bookings
     public static void printBookedRooms() {
 
         System.out.println("\n--- BOOKED ROOMS ---");
 
         boolean found = false;
-
+    // Loop through all bookings
         for (int i = 0; i < bookings.size(); i++) {
 
             BookingContext booking = bookings.get(i);
@@ -436,7 +439,7 @@ public class main {
                 System.out.println("State: " + booking.getState().getClass().getSimpleName());
             }
         }
-
+    // No active bookings found
         if (!found) {
 
             System.out.println("No booked rooms.");
