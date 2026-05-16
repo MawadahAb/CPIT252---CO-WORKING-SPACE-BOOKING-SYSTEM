@@ -1,5 +1,6 @@
 package workspace;
 
+// Class responsible for managing workspace availability
 public class WorkspaceInventory {
 
     private int smallMeetingRooms = 3;
@@ -7,7 +8,8 @@ public class WorkspaceInventory {
     private int largeMeetingRooms = 1;
     private int privateOffices = 5;
     private int openSpaceSeats = 20;
-
+    
+    // Reserve a workspace if available
     public boolean reserve(Workspace workspace) {
         String description = workspace.getDescription();
         if (description.contains("Small") && smallMeetingRooms > 0) {
@@ -37,7 +39,8 @@ public class WorkspaceInventory {
 
         return false;
     }
-
+    
+    // Release workspace after customer leaves
     public void release(Workspace workspace) {
         String description = workspace.getDescription();
 
