@@ -12,6 +12,7 @@ public class PayPal implements PaymentStrategy {
         this.password = password;
     }
 
+    // Validate PayPal account details and process the payment
     @Override
     public PaymentReceipt pay(double amount) {
 
@@ -27,6 +28,7 @@ public class PayPal implements PaymentStrategy {
             return new PaymentReceipt(false, null, amount, "PayPal", "Invalid password");
         }
 
+        // Generate a unique transaction ID for successful payments
         String transactionId = UUID.randomUUID().toString();
 
         return new PaymentReceipt(true, transactionId, amount, "PayPal", "Payment successful");

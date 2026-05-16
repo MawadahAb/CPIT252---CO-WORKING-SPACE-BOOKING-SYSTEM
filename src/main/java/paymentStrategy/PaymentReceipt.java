@@ -12,6 +12,7 @@ public class PaymentReceipt {
     private String paymentMethod;
     private String message;
 
+    // Initialize payment receipt information after a payment attempt
     public PaymentReceipt (boolean successful, String transactionId,double amount,String paymentMethod,String message ) {
         this.successful = successful;
         this.transactionId = transactionId;
@@ -38,8 +39,9 @@ public class PaymentReceipt {
         return message;
     }
 
+    // Print the payment receipt with booking and payment details
     public void printReceipt(Customer customer, Workspace workspace,int bookingDurationHours ) {
-
+    // Stop receipt generation if the payment was not successful
         if (!successful) {
             System.out.println("Payment failed. No receipt generated.");
         }
@@ -48,11 +50,13 @@ public class PaymentReceipt {
         System.out.println("Dear " + customer.getFullName() + ",");
         System.out.println("Your booking has been confirmed successfully.\n");
 
+        // Display booking information
         System.out.println("Booking Details:");
         System.out.println("Workspace: " + workspace.getDescription());
         System.out.println("Capacity: " + workspace.getCapacity());
         System.out.println("Booking Duration Hours: " + bookingDurationHours);
 
+        // Display payment information
         System.out.println("\nPayment Details:");
         System.out.println("Amount Paid: " + amount + " SAR");
         System.out.println("Payment Method: " + paymentMethod);

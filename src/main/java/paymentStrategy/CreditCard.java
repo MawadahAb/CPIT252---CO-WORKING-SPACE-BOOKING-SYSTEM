@@ -16,6 +16,8 @@ public class CreditCard implements PaymentStrategy {
         this.expirationDate = expirationDate;
     }
 
+
+    // Validate credit card details and process the payment
     @Override
     public PaymentReceipt pay(double amount) {
 
@@ -38,6 +40,7 @@ public class CreditCard implements PaymentStrategy {
             return new PaymentReceipt(false, null, amount, "Credit Card", "Invalid expiration date");
         }
 
+        // Generate a unique transaction ID for successful payments
         String transactionId = UUID.randomUUID().toString();
 
         return new PaymentReceipt(true, transactionId, amount,
