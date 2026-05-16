@@ -1,5 +1,6 @@
 package workspace;
 
+// PrivateOffice class implements the Workspace interface
 public class PrivateOffice implements  Workspace {
 
     private final int capacity = 1;
@@ -15,7 +16,8 @@ public class PrivateOffice implements  Workspace {
     public double getCost() {
         return costPerHour;
     }
-
+    
+    // Private office has no add-ons by default
     @Override
     public double getAddOnsCost() {
         return 0;
