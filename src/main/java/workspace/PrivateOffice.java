@@ -1,6 +1,7 @@
 package workspace;
 
 public class PrivateOffice implements  Workspace {
+
     private final int capacity = 1;
     private final double costPerHour = 100
             ;

@@ -2,7 +2,6 @@ package workspace;
 
 public class MeetingRoom implements  Workspace {
 
-
     private String size;
     private int capacity;
     private double costPerHour;

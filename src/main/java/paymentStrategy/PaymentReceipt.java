@@ -5,6 +5,7 @@ import customer.Customer;
 
 public class PaymentReceipt {
 
+
     private boolean successful;
     private String transactionId;
     private double amount;

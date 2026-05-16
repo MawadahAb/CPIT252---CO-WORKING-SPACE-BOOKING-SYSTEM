@@ -1,6 +1,8 @@
 package workspace;
 
 public class OpenSpace implements Workspace {
+
+
     private final int totalSeats;
     private int availableSeats;
     private double costPerHour;
@@ -13,6 +15,7 @@ public class OpenSpace implements Workspace {
 
     public boolean bookSeat() {
         if (availableSeats > 0) {
+            // Reduce available seats after successful booking
             availableSeats--;
             return true;
         }
@@ -21,6 +24,7 @@ public class OpenSpace implements Workspace {
 
     public void cancelSeat() {
         if (availableSeats < totalSeats) {
+            // Restore seat availability after cancellation
             availableSeats++;
         }
     }

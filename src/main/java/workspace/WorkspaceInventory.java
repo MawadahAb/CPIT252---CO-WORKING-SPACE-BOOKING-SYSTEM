@@ -10,7 +10,6 @@ public class WorkspaceInventory {
 
     public boolean reserve(Workspace workspace) {
         String description = workspace.getDescription();
-
         if (description.contains("Small") && smallMeetingRooms > 0) {
             smallMeetingRooms--;
             return true;
