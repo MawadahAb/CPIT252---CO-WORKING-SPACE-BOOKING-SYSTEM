@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="CPIT252---CO-WORKING-SPACE-BOOKING-SYSTEM:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/CPIT252___CO_WORKING_SPACE_BOOKING_SYSTEM_jar</output-path>
+    <root id="archive" name="CPIT252---CO-WORKING-SPACE-BOOKING-SYSTEM.jar">
+      <element id="module-output" name="CPIT252---CO-WORKING-SPACE-BOOKING-SYSTEM" />
+    </root>
+  </artifact>
+</component>
