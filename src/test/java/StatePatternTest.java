@@ -38,8 +38,7 @@ public class StatePatternTest {
         booking.book();
         booking.checkIn();
 
-        PaymentContext paymentContext =
-                new PaymentContext(new PayPal("salwa@gmail.com", "12345"));
+        PaymentContext paymentContext = new PaymentContext(new PayPal("salwa@gmail.com", "12345"));
 
         booking.checkOut(paymentContext);
 
@@ -60,8 +59,7 @@ public class StatePatternTest {
     void shouldNotAddServiceBeforeBooking() {
         BookingContext booking = createBooking();
 
-        Workspace decoratedWorkspace =
-                new CoffeeDecorator(booking.getWorkspace());
+        Workspace decoratedWorkspace = new CoffeeDecorator(booking.getWorkspace());
 
         booking.addService(decoratedWorkspace, "Coffee");
 
@@ -76,46 +74,32 @@ public class StatePatternTest {
 
         bookingBeforeCheckIn.book();
 
-        Workspace coffeeBeforeCheckIn =
-                new CoffeeDecorator(bookingBeforeCheckIn.getWorkspace());
+        Workspace coffeeBeforeCheckIn = new CoffeeDecorator(bookingBeforeCheckIn.getWorkspace());
 
         bookingBeforeCheckIn.addService(coffeeBeforeCheckIn, "Coffee");
 
-        double coffeePriceBeforeCheckIn =
-                bookingBeforeCheckIn.getWorkspace().getAddOnsCost()
-                        + bookingBeforeCheckIn.getExtraFee();
-
+        double coffeePriceBeforeCheckIn = bookingBeforeCheckIn.getWorkspace().getAddOnsCost() + bookingBeforeCheckIn.getExtraFee();
 
         BookingContext bookingAfterCheckIn = createBooking();
 
         bookingAfterCheckIn.book();
         bookingAfterCheckIn.checkIn();
 
-        Workspace coffeeAfterCheckIn =
-                new CoffeeDecorator(bookingAfterCheckIn.getWorkspace());
+        Workspace coffeeAfterCheckIn = new CoffeeDecorator(bookingAfterCheckIn.getWorkspace());
 
         bookingAfterCheckIn.addService(coffeeAfterCheckIn, "Coffee");
 
-        double coffeePriceAfterCheckIn =
-                bookingAfterCheckIn.getWorkspace().getAddOnsCost()
-                        + bookingAfterCheckIn.getExtraFee();
+        double coffeePriceAfterCheckIn = bookingAfterCheckIn.getWorkspace().getAddOnsCost() + bookingAfterCheckIn.getExtraFee();
 
         assertTrue(coffeePriceAfterCheckIn > coffeePriceBeforeCheckIn);
     }
 
     private BookingContext createBooking() {
-        Customer customer = new Customer(
-                "Salwa",
-                "0555555555",
-                "salwa@gmail.com",
-                2
-        );
+        Customer customer = new Customer("Salwa", "0555555555");
 
-        Workspace workspace =
-                workSpaceFactory.createWorkspace("PrivateOffice");
+        Workspace workspace = workSpaceFactory.createWorkspace("PrivateOffice");
 
-        WorkspaceInventory inventory =
-                new WorkspaceInventory();
+        WorkspaceInventory inventory = new WorkspaceInventory();
 
         return new BookingContext(customer, workspace, inventory, 2);
     }
