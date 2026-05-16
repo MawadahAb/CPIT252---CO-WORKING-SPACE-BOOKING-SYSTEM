@@ -5,6 +5,7 @@ import paymentStrategy.PaymentContext;
 import workspace.Workspace;
 import workspace.WorkspaceInventory;
 
+// to manages the booking process
 public class BookingContext {
 
     private Customer customer;
@@ -14,6 +15,7 @@ public class BookingContext {
     private int bookingDurationHours;
     private double extraFee;
 
+    // Constructor to initialize booking information
     public BookingContext(Customer customer,
                           Workspace workspace,
                           WorkspaceInventory inventory,
@@ -24,30 +26,35 @@ public class BookingContext {
         this.inventory = inventory;
         this.bookingDurationHours = bookingDurationHours;
 
+        // Initial booking state
         this.state = new AvailableState();
+
+        // Initial extra fee
         this.extraFee = 0;
     }
 
+    // booking action to current state
     public void book() {
         state.book(this);
     }
-
+    // add service action to current state
     public void addService(Workspace newWorkspace, String serviceName) {
         state.addService(this, newWorkspace, serviceName);
     }
-
+    // check-in action to current state
     public void checkIn() {
         state.checkIn(this);
     }
-
+    // check-out action to current state
     public void checkOut(PaymentContext paymentContext) {
         state.checkOut(this, paymentContext);
     }
 
+    // cancel action to current state
     public void cancel() {
         state.cancel(this);
     }
-
+    // Change booking state during workflow
     public void changeState(BookingState state) {
         this.state = state;
     }
