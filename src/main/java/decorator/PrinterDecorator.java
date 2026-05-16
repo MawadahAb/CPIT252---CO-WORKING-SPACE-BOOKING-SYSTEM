@@ -8,6 +8,7 @@ public class PrinterDecorator extends WorkspaceDecorator {
         super(decoratedWorkspace);
     }
 
+    // Add printer service price to additional services cost
     @Override
     public double getAddOnsCost() {
         return decoratedWorkspace.getAddOnsCost() + 15;

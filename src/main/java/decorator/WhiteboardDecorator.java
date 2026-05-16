@@ -9,6 +9,7 @@ public class WhiteboardDecorator extends WorkspaceDecorator {
         super(decoratedWorkspace);
     }
 
+    // Add whiteboard service price to additional services cost
     @Override
     public double getAddOnsCost() {
         return decoratedWorkspace.getAddOnsCost() + 5;

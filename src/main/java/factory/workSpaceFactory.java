@@ -8,6 +8,8 @@ public class workSpaceFactory {
 
 public static Workspace createWorkspace(String type) {
 
+    // Create and return different workspace objects based on the provided workspace type
+
     if (type.equalsIgnoreCase("LargeMeetingRoom")) {
         return new MeetingRoom("Large");
     }

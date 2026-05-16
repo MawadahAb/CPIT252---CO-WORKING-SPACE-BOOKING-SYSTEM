@@ -8,6 +8,7 @@ public class CoffeeDecorator extends WorkspaceDecorator {
         super(decoratedWorkspace);
     }
 
+    // Add coffee service price to additional services cost
     @Override
     public double getAddOnsCost() {
         return decoratedWorkspace.getAddOnsCost() + 10;
