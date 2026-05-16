@@ -29,9 +29,9 @@ public class main {
 
     public static void main(String[] args) {
 
-        System.out.println("====================================");
+        System.out.println("-------------------------------------");
         System.out.println(" CO-WORKING SPACE BOOKING SYSTEM ");
-        System.out.println("====================================");
+        System.out.println("-------------------------------------");
 
         while (true) {
             System.out.println("\nAre you:");
@@ -58,7 +58,7 @@ public class main {
 
     public static void userMenu() {
 
-        System.out.println("\n===== USER MENU =====");
+        System.out.println("\n----- USER MENU -----");
         System.out.println("Welcome User!");
 
         System.out.print("\nEnter your full name: ");
@@ -88,7 +88,7 @@ public class main {
 
         BookingContext booking = new BookingContext(customer, workspace, inventory, hours);
 
-        System.out.println("\n===== WORKSPACE DETAILS =====");
+        System.out.println("\n----- WORKSPACE DETAILS -----");
         System.out.println("Workspace: " + workspace.getDescription());
         System.out.println("Capacity: " + workspace.getCapacity());
         System.out.println("Price per hour: " + workspace.getCost() + " SAR");
@@ -147,7 +147,7 @@ public class main {
         boolean running = true;
 
         while (running) {
-            System.out.println("\n===== BOOKING MENU =====");
+            System.out.println("\n----- BOOKING MENU -----");
             System.out.println("Workspace: " + booking.getWorkspace().getDescription());
             System.out.println("Total Price: " + booking.getTotalCost() + " SAR");
 
@@ -280,7 +280,7 @@ public class main {
         boolean managerRunning = true;
 
         while (managerRunning) {
-            System.out.println("\n===== MANAGER MENU =====");
+            System.out.println("\n----- MANAGER MENU -----");
             System.out.println("1. View all workspaces");
             System.out.println("2. View available rooms");
             System.out.println("3. View booked rooms");
@@ -310,7 +310,7 @@ public class main {
 
     public static void printAllWorkspaces() {
 
-        System.out.println("\n===== ALL WORKSPACES =====");
+        System.out.println("\n----- ALL WORKSPACES -----");
 
         Workspace privateOffice = workSpaceFactory.createWorkspace("PrivateOffice");
         Workspace smallMeetingRoom = workSpaceFactory.createWorkspace("SmallMeetingRoom");
@@ -341,7 +341,7 @@ public class main {
 
     public static void printAvailableRooms() {
 
-        System.out.println("\n===== AVAILABLE ROOMS =====");
+        System.out.println("\n----- AVAILABLE ROOMS -----");
 
         printAvailability("PrivateOffice");
         printAvailability("SmallMeetingRoom");
@@ -369,7 +369,7 @@ public class main {
 
     public static void printBookedRooms() {
 
-        System.out.println("\n===== BOOKED ROOMS =====");
+        System.out.println("\n----- BOOKED ROOMS-----");
 
         boolean found = false;
 
