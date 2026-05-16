@@ -1,15 +1,16 @@
 package workspace;
 
+// MeetingRoom class implements the Workspace interface
 public class MeetingRoom implements  Workspace {
 
     private String size;
     private int capacity;
     private double costPerHour;
 
-
+    // Constructor to create a meeting room based on size
     public MeetingRoom(String size) {
         this.size = size;
-
+        // Set capacity and price depending on room size
         if (size.equalsIgnoreCase("Large")) {
             capacity = 12;
             costPerHour=120;
@@ -30,7 +31,7 @@ public class MeetingRoom implements  Workspace {
     public double getCost() {
         return costPerHour;
     }
-
+    // Base workspace has no add-ons
     @Override
     public double getAddOnsCost() {
         return 0;
