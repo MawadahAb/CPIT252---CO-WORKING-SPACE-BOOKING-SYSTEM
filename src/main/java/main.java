@@ -1,20 +1,15 @@
 import customer.Customer;
-
 import decorator.CoffeeDecorator;
 import decorator.PrinterDecorator;
 import decorator.ProjectorDecorator;
 import decorator.WhiteboardDecorator;
-
 import factory.workSpaceFactory;
-
 import paymentStrategy.CreditCard;
 import paymentStrategy.PayPal;
 import paymentStrategy.PaymentContext;
-
 import state.BookingContext;
 import state.CheckedInState;
 import state.ReservedState;
-
 import workspace.Workspace;
 import workspace.WorkspaceInventory;
 
@@ -25,13 +20,13 @@ public class main {
 
     static Scanner input = new Scanner(System.in);
 
-    // Shared inventory object to manage workspace availability
+    // Shared inventory
     static WorkspaceInventory inventory = new WorkspaceInventory();
 
-    // Store all bookings in the system
+    // Store bookings
     static ArrayList<BookingContext> bookings = new ArrayList<>();
 
-    // Store booking phone numbers to link each booking with a user
+    // Store booking phone numbers
     static ArrayList<String> bookingPhones = new ArrayList<>();
 
     public static void main(String[] args) {
@@ -50,22 +45,19 @@ public class main {
             int choice = readIntInRange("Enter your choice: ", 1, 3);
 
             if (choice == 1) {
-
                 userMenu();
 
             } else if (choice == 2) {
-
                 managerMenu();
 
             } else {
-
                 System.out.println("Thank you for using the system.");
                 break;
             }
         }
     }
 
-    // Handle user booking workflow
+    // User menu
     public static void userMenu() {
 
         System.out.println("\n--- USER MENU ---");
@@ -76,7 +68,6 @@ public class main {
         int userChoice = readIntInRange("Enter your choice: ", 1, 2);
 
         if (userChoice == 2) {
-
             continueExistingBooking();
             return;
         }
@@ -94,8 +85,12 @@ public class main {
 
         Workspace workspace = chooseWorkspace();
 
-        BookingContext booking =
-                new BookingContext(customer, workspace, inventory, hours);
+        BookingContext booking = new BookingContext(
+                customer,
+                workspace,
+                inventory,
+                hours
+        );
 
         System.out.println("\n--- WORKSPACE DETAILS ---");
         System.out.println("Workspace: " + workspace.getDescription());
@@ -125,12 +120,11 @@ public class main {
             }
 
         } else {
-
             System.out.println("Booking cancelled.");
         }
     }
 
-    // Continue booking using phone number
+    // Continue booking
     public static void continueExistingBooking() {
 
         String phone = readNonEmptyText("Enter your phone number: ");
@@ -138,7 +132,6 @@ public class main {
         int bookingIndex = findActiveBookingByPhone(phone);
 
         if (bookingIndex == -1) {
-
             System.out.println("No active booking found for this phone number.");
             return;
         }
@@ -149,7 +142,7 @@ public class main {
         bookingProcessMenu(bookings.get(bookingIndex));
     }
 
-    // Find active booking by phone number
+    // Find booking
     public static int findActiveBookingByPhone(String phone) {
 
         for (int i = 0; i < bookings.size(); i++) {
@@ -166,30 +159,21 @@ public class main {
         return -1;
     }
 
-    // Check if booking is still active
+    // Check active booking
     public static boolean isActiveBooking(BookingContext booking) {
 
         return booking.getState() instanceof ReservedState
                 || booking.getState() instanceof CheckedInState;
     }
 
-    // Allow user to choose workspace type
+    // Choose workspace
     public static Workspace chooseWorkspace() {
 
-        Workspace privateOffice =
-                workSpaceFactory.createWorkspace("PrivateOffice");
-
-        Workspace smallMeetingRoom =
-                workSpaceFactory.createWorkspace("SmallMeetingRoom");
-
-        Workspace mediumMeetingRoom =
-                workSpaceFactory.createWorkspace("MediumMeetingRoom");
-
-        Workspace largeMeetingRoom =
-                workSpaceFactory.createWorkspace("LargeMeetingRoom");
-
-        Workspace openSpace =
-                workSpaceFactory.createWorkspace("OpenSpace");
+        Workspace privateOffice = workSpaceFactory.createWorkspace("PrivateOffice");
+        Workspace smallMeetingRoom = workSpaceFactory.createWorkspace("SmallMeetingRoom");
+        Workspace mediumMeetingRoom = workSpaceFactory.createWorkspace("MediumMeetingRoom");
+        Workspace largeMeetingRoom = workSpaceFactory.createWorkspace("LargeMeetingRoom");
+        Workspace openSpace = workSpaceFactory.createWorkspace("OpenSpace");
 
         System.out.println("\nChoose Workspace Type:");
 
@@ -213,32 +197,26 @@ public class main {
                 + " | Capacity: " + openSpace.getCapacity()
                 + " | Price: " + openSpace.getCost() + " SAR/hour");
 
-        int workspaceChoice =
-                readIntInRange("Enter your choice: ", 1, 5);
+        int workspaceChoice = readIntInRange("Enter your choice: ", 1, 5);
 
         if (workspaceChoice == 1) {
-
             return privateOffice;
 
         } else if (workspaceChoice == 2) {
-
             return smallMeetingRoom;
 
         } else if (workspaceChoice == 3) {
-
             return mediumMeetingRoom;
 
         } else if (workspaceChoice == 4) {
-
             return largeMeetingRoom;
 
         } else {
-
             return openSpace;
         }
     }
 
-    // Handle booking state workflow
+    // Booking workflow
     public static void bookingProcessMenu(BookingContext booking) {
 
         boolean running = true;
@@ -266,20 +244,16 @@ public class main {
                 int choice = readIntInRange("Enter your choice: ", 1, 4);
 
                 if (choice == 1) {
-
                     addServices(booking);
 
                 } else if (choice == 2) {
-
                     booking.checkIn();
 
                 } else if (choice == 3) {
-
                     booking.cancel();
                     running = false;
 
                 } else {
-
                     running = false;
                 }
 
@@ -292,30 +266,24 @@ public class main {
                 int choice = readIntInRange("Enter your choice: ", 1, 3);
 
                 if (choice == 1) {
-
                     addServices(booking);
 
                 } else if (choice == 2) {
-
                     PaymentContext paymentContext = choosePaymentMethod();
-
                     booking.checkOut(paymentContext);
-
                     running = false;
 
                 } else {
-
                     running = false;
                 }
 
             } else {
-
                 running = false;
             }
         }
     }
 
-    // Add extra services to the booking
+    // Add services
     public static void addServices(BookingContext booking) {
 
         boolean adding = true;
@@ -324,69 +292,67 @@ public class main {
 
             Workspace currentWorkspace = booking.getWorkspace();
 
-            Workspace coffee =
-                    new CoffeeDecorator(currentWorkspace);
-
-            Workspace printer =
-                    new PrinterDecorator(currentWorkspace);
-
-            Workspace projector =
-                    new ProjectorDecorator(currentWorkspace);
-
-            Workspace whiteboard =
-                    new WhiteboardDecorator(currentWorkspace);
+            Workspace coffee = new CoffeeDecorator(currentWorkspace);
+            Workspace printer = new PrinterDecorator(currentWorkspace);
+            Workspace projector = new ProjectorDecorator(currentWorkspace);
+            Workspace whiteboard = new WhiteboardDecorator(currentWorkspace);
 
             System.out.println("\nChoose Extra Service:");
 
             System.out.println("1. Coffee | Price: "
                     + (coffee.getAddOnsCost()
-                    - currentWorkspace.getAddOnsCost())
-                    + " SAR");
+                    - currentWorkspace.getAddOnsCost()) + " SAR");
 
             System.out.println("2. Printer | Price: "
                     + (printer.getAddOnsCost()
-                    - currentWorkspace.getAddOnsCost())
-                    + " SAR");
+                    - currentWorkspace.getAddOnsCost()) + " SAR");
 
             System.out.println("3. Projector | Price: "
                     + (projector.getAddOnsCost()
-                    - currentWorkspace.getAddOnsCost())
-                    + " SAR");
+                    - currentWorkspace.getAddOnsCost()) + " SAR");
 
             System.out.println("4. Whiteboard | Price: "
                     + (whiteboard.getAddOnsCost()
-                    - currentWorkspace.getAddOnsCost())
-                    + " SAR");
+                    - currentWorkspace.getAddOnsCost()) + " SAR");
 
             System.out.println("5. Done");
 
-            int serviceChoice =
-                    readIntInRange("Enter your choice: ", 1, 5);
+            int serviceChoice = readIntInRange("Enter your choice: ", 1, 5);
 
             if (serviceChoice == 1) {
-
                 booking.addService(coffee, "Coffee");
+                printUpdatedPrice(booking);
 
             } else if (serviceChoice == 2) {
-
                 booking.addService(printer, "Printer");
+                printUpdatedPrice(booking);
 
             } else if (serviceChoice == 3) {
-
                 booking.addService(projector, "Projector");
+                printUpdatedPrice(booking);
 
             } else if (serviceChoice == 4) {
-
                 booking.addService(whiteboard, "Whiteboard");
+                printUpdatedPrice(booking);
 
             } else {
-
                 adding = false;
             }
         }
     }
 
-    // Choose payment method using Strategy Pattern
+    // Print updated price
+    public static void printUpdatedPrice(BookingContext booking) {
+
+        System.out.println("Service added.");
+        System.out.println("Updated workspace: "
+                + booking.getWorkspace().getDescription());
+
+        System.out.println("Updated total price: "
+                + booking.getTotalCost() + " SAR");
+    }
+
+    // Choose payment method
     public static PaymentContext choosePaymentMethod() {
 
         while (true) {
@@ -395,25 +361,17 @@ public class main {
             System.out.println("1. Credit Card");
             System.out.println("2. PayPal");
 
-            int paymentChoice =
-                    readIntInRange("Enter your choice: ", 1, 2);
+            int paymentChoice = readIntInRange("Enter your choice: ", 1, 2);
 
             if (paymentChoice == 1) {
 
                 System.out.println("Card number must be at least 8 digits.");
                 System.out.println("CVV must be exactly 3 digits.");
 
-                String cardHolderName =
-                        readNonEmptyText("Card holder name: ");
-
-                String cardNumber =
-                        readCardNumber();
-
-                String cvv =
-                        readCvv();
-
-                String expirationDate =
-                        readNonEmptyText("Expiration date: ");
+                String cardHolderName = readNonEmptyText("Card holder name: ");
+                String cardNumber = readCardNumber();
+                String cvv = readCvv();
+                String expirationDate = readNonEmptyText("Expiration date: ");
 
                 return new PaymentContext(
                         new CreditCard(
@@ -426,11 +384,11 @@ public class main {
 
             } else {
 
-                String paypalEmail =
-                        readNonEmptyText("PayPal email: ");
+                System.out.println("PayPal email must contain @ and .");
+                System.out.println("PayPal password must be at least 6 characters.");
 
-                String paypalPassword =
-                        readNonEmptyText("PayPal password: ");
+                String paypalEmail = readPayPalEmail();
+                String paypalPassword = readPayPalPassword();
 
                 return new PaymentContext(
                         new PayPal(
@@ -442,7 +400,7 @@ public class main {
         }
     }
 
-    // Handle manager operations
+    // Manager menu
     public static void managerMenu() {
 
         boolean managerRunning = true;
@@ -455,25 +413,21 @@ public class main {
             System.out.println("2. View booked rooms");
             System.out.println("3. Return to main menu");
 
-            int managerChoice =
-                    readIntInRange("Enter your choice: ", 1, 3);
+            int managerChoice = readIntInRange("Enter your choice: ", 1, 3);
 
             if (managerChoice == 1) {
-
                 printAvailableRooms();
 
             } else if (managerChoice == 2) {
-
                 printBookedRooms();
 
             } else {
-
                 managerRunning = false;
             }
         }
     }
 
-    // Display all available workspaces
+    // Print available rooms
     public static void printAvailableRooms() {
 
         System.out.println("\n--- AVAILABLE ROOMS ---");
@@ -485,33 +439,28 @@ public class main {
         printAvailability("OpenSpace");
     }
 
-    // Calculate and display available rooms count
+    // Print availability
     public static void printAvailability(String type) {
 
-        Workspace workspace =
-                workSpaceFactory.createWorkspace(type);
+        Workspace workspace = workSpaceFactory.createWorkspace(type);
 
         int count = 0;
 
         while (inventory.reserve(workspace)) {
-
             count++;
         }
 
         for (int i = 0; i < count; i++) {
-
             inventory.release(workspace);
         }
 
-        System.out.println(
-                workspace.getDescription()
-                        + ": "
-                        + count
-                        + " available"
-        );
+        System.out.println(workspace.getDescription()
+                + ": "
+                + count
+                + " available");
     }
 
-    // Display all active bookings
+    // Print booked rooms
     public static void printBookedRooms() {
 
         System.out.println("\n--- BOOKED ROOMS ---");
@@ -526,8 +475,7 @@ public class main {
 
                 found = true;
 
-                System.out.println("\nBooking Number "
-                        + (i + 1));
+                System.out.println("\nBooking Number " + (i + 1));
 
                 System.out.println("Customer: "
                         + booking.getCustomer().getContactInfo());
@@ -551,17 +499,12 @@ public class main {
         }
 
         if (!found) {
-
             System.out.println("No booked rooms.");
         }
     }
 
-    // Read integer within a specific range
-    public static int readIntInRange(
-            String message,
-            int min,
-            int max
-    ) {
+    // Read valid number
+    public static int readIntInRange(String message, int min, int max) {
 
         while (true) {
 
@@ -573,25 +516,19 @@ public class main {
                 input.nextLine();
 
                 if (value >= min && value <= max) {
-
                     return value;
                 }
-            } else {
 
+            } else {
                 input.nextLine();
             }
 
-            System.out.println(
-                    "Invalid input. Please enter a number from "
-                            + min
-                            + " to "
-                            + max
-                            + "."
-            );
+            System.out.println("Invalid input. Please enter a number from "
+                    + min + " to " + max + ".");
         }
     }
 
-    // Read non-empty text
+    // Read text
     public static String readNonEmptyText(String message) {
 
         while (true) {
@@ -601,7 +538,6 @@ public class main {
             String value = input.nextLine();
 
             if (!value.trim().isEmpty()) {
-
                 return value;
             }
 
@@ -609,7 +545,7 @@ public class main {
         }
     }
 
-    // Read valid card number
+    // Read card number
     public static String readCardNumber() {
 
         while (true) {
@@ -624,13 +560,11 @@ public class main {
                 return cardNumber;
             }
 
-            System.out.println(
-                    "Invalid card number. It must be at least 8 digits."
-            );
+            System.out.println("Invalid card number. It must be at least 8 digits.");
         }
     }
 
-    // Read valid CVV
+    // Read CVV
     public static String readCvv() {
 
         while (true) {
@@ -645,9 +579,44 @@ public class main {
                 return cvv;
             }
 
-            System.out.println(
-                    "Invalid CVV. It must be exactly 3 digits."
-            );
+            System.out.println("Invalid CVV. It must be exactly 3 digits.");
+        }
+    }
+
+    // Read PayPal email
+    public static String readPayPalEmail() {
+
+        while (true) {
+
+            System.out.print("PayPal email: ");
+
+            String email = input.nextLine();
+
+            if (email.contains("@")
+                    && email.contains(".")
+                    && !email.trim().isEmpty()) {
+
+                return email;
+            }
+
+            System.out.println("Invalid PayPal email. Email must contain @ and .");
+        }
+    }
+
+    // Read PayPal password
+    public static String readPayPalPassword() {
+
+        while (true) {
+
+            System.out.print("PayPal password: ");
+
+            String password = input.nextLine();
+
+            if (password.length() >= 6) {
+                return password;
+            }
+
+            System.out.println("Invalid PayPal password. It must be at least 6 characters.");
         }
     }
 }
